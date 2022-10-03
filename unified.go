@@ -99,7 +99,9 @@ func ToUnified(from, to string, content string, edits []TextEdit) Unified {
 			//direct extension
 		case h != nil && start <= last+gap:
 			//within range of previous lines, add the joiners
-			addEqualLines(h, lines, last, start)
+			// and increment the toLine counter so the destination
+			// line counts are correct.
+			toLine += addEqualLines(h, lines, last, start)
 		default:
 			//need to start a new hunk
 			if h != nil {
